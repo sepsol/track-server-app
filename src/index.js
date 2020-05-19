@@ -2,16 +2,19 @@
 require('dotenv').config(); // we use this to store our sensitive information during development in environment variables
 
 require('./models/User'); // this is how we should at least run our mongoose model one time
+require('./models/Track');
 const express = require('express');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes');
+const trackRoutes = require('./routes/trackRoutes');
 const requireAuth = require('./middlewares/requireAuth');
 
 
 const app = express();   // this creates our express app
 
 app.use(express.json()); // this parses requests to json format  -- this is called middleware
-app.use(authRoutes);     // our request handler functions are here
+app.use(authRoutes);     // our route handler functions are here, we initiate them after creating our app and running express.json()
+app.use(trackRoutes);
 
 const mongoUri = process.env.MONGODB_ADMIN;
 if (!mongoUri) throw new Error('You need to provide the authentication string from mongoDB.');
