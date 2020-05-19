@@ -20,4 +20,23 @@ router.get('/tracks', async (req, res) => {
 });
 
 
+router.post('/tracks', async (req, res) => {
+  const { name, locations } = req.body;
+  if (!name || !locations) return res.status(422).send('You have to provide a name and locations.');
+  // 1  check to see if the values are provided (above)
+  // 2  check and see if the values provided are valid against our model
+  // 3  save the entry to mongodb or show an error
+  
+  // steps 2 & 3 are done while we do a save() on our new entry
+  // so error could be the result of step 2 doing its job :)
+  try {
+    const track = new Track({ userId: req.user._id, name, locations });  // { ..., name: name, locations: locations }
+    await track.save();
+    res.send({ track });
+  } catch (err) {
+    res.status(422).send({ error: err.message });
+  }
+});
+
+
 module.exports = router;
