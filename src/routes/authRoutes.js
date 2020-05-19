@@ -36,7 +36,7 @@ router.post('/signin', async (req, res) => {
   const { email, password } = req.body;  
 
   // we'll first check to see if email and password are provided
-  if (!email || !password) return res.status(422).send('You must provide your email and password.');
+  if (!email || !password) return res.status(422).send({ error: 'You must provide your email and password.' });
 
   // if the email was provided, we'll check to see if there's any match with our mongodb documents
   // we'll use a mongoose method called findOne on mongoose's User model
@@ -44,7 +44,7 @@ router.post('/signin', async (req, res) => {
   // the expected result is to either find a user object with that email in our database, or return null for the user
 
   const user = await User.findOne({ email });
-  if (!user) return res.status(422).send('Invalid email or password.');
+  if (!user) return res.status(404).send({ error: 'User does not exist.' });
 
   // we've now successfully validated user's email, now it's time to validate his/her password:
 
@@ -54,12 +54,13 @@ router.post('/signin', async (req, res) => {
 
   // (remember, our promise either returned an error inside reject or true inside resolve)
   try {
-    await comparePassword(password);
+    await user.comparePassword(password);
     // run the code above and if we didn't jump into the catch block, do the following:
+    // give the user a new token so that after authentication, he'll be authorized to use private routes in our app
     const token = jwt.sign({ userId: user._id }, process.env.JWT_KEY);   // arguments: (payload or body of the token , our secret JWT key)
-    res.send(token);
+    res.send({ token });
   } catch (err) {
-    res.status(422).send('Invalid email or password.');
+    res.status(422).send({ error: 'Invalid email or password.' });
   }
 });
 
