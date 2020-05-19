@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 
 const pointSchema = new mongoose.Schema({
-  // timestamps are stored as a long number which counts miliseconds passed from 1970s -- look at iat property inside the payload of a jwt token to see an example of this
+  // timestamps are stored as a long number which counts miliseconds passed from 1970 -- look at iat property inside the payload of a jwt token to see an example of this
   timestamp: Number,   //  timestamp: Number  ===  timestamp: { type: Number }  ===  timestamp: { type: mongoose.Schema.Types.Number }
   coords: {
     latitude: Number,
