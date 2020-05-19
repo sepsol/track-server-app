@@ -14,7 +14,7 @@ module.exports = (req, res, next) => {
   // const authorization = req.headers.authorization => NOTE: express automatically converts all header keys to lowercase
 
   // if we find no auth inside the header we return this message:
-  if (!authorization) return res.status(401).send('Failed to login.');
+  if (!authorization) return res.status(401).send('You have to login first.');
   // 401 semantically means "unauthorised",[33] the user does not have valid authentication credentials for the target resource.
 
   // then we remove the token from it and store it in a value:
