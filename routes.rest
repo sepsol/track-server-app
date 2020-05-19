@@ -1,7 +1,3 @@
-GET http://localhost:3000/
-
-###
-
 POST http://localhost:3000/signup
 #
 # Request Header:
@@ -9,6 +5,21 @@ Content-Type: application/json
 
 # Request Body:
 {
-  "email": "sepsoool@test.com",
+  "email": "test@test.com",
+  "password": "mypassword"
+}
+
+###
+
+GET http://localhost:3000/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZWM0NGE2ODg4OTdhOTA2MzA0YjY4ODEiLCJpYXQiOjE1ODk5MjI0MDl9.d4ksSmbp8ytNZW89n2ANWpsJ1YRpds54VuOu-ZjMZZI
+
+###
+
+POST http://localhost:3000/signin
+Content-Type: application/json
+
+{
+  "email": "test@test.com",
   "password": "mypassword"
 }
