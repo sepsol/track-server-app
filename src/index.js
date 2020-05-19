@@ -2,14 +2,15 @@
 require('dotenv').config(); // we use this to store our sensitive information during development in environment variables
 require('./models/User'); // our mongoose document collection - schema model
 const express = require('express');
-const authRouter = require('./routes/authentication');
 const mongoose = require('mongoose');
+const authRoutes = require('./routes/authRoutes');
+const requireAuth = require('./middlewares/requireAuth');
 
 
 const app = express();   // this creates our express app
 
 app.use(express.json()); // this parses requests to json format  -- this is called middleware
-app.use(authRouter);     // our request handler functions are here
+app.use(authRoutes);     // our request handler functions are here
 
 const mongoUri = process.env.MONGODB_ADMIN;
 
@@ -25,7 +26,7 @@ mongoose.connect (mongoUri, {
 mongoose.connection.on('connected', () => console.log('Connected to mongo instance.'));
 mongoose.connection.on('error', err => console.error('Error connecting to mongo.', err));
 
-app.get('/', (req, res) => res.send('Hello, world!'));
+app.get('/', requireAuth, (req, res) => res.send(`Your email is: ${req.user.email}`));
 
 
 
