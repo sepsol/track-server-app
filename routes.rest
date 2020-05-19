@@ -1,0 +1,14 @@
+GET http://localhost:3000/
+
+###
+
+POST http://localhost:3000/signup
+#
+# Request Header:
+Content-Type: application/json 
+
+# Request Body:
+{
+  "email": "sepsoool@test.com",
+  "password": "mypassword"
+}
