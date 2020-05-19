@@ -1,6 +1,7 @@
 // our document imports:
 require('dotenv').config(); // we use this to store our sensitive information during development in environment variables
-require('./models/User'); // our mongoose document collection - schema model
+
+require('./models/User'); // this is how we should at least run our mongoose model one time
 const express = require('express');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes');

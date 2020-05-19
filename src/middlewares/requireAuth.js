@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 
-const User = mongoose.model('User');
+const User = mongoose.model('User');  // this is how you should import mongoose models without invoking them
 
 
 // for validation a user will send a token that was generated with our key and has a payload of their id and iat (issued at) 
