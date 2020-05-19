@@ -27,3 +27,27 @@ Content-Type: application/json
 ###
 
 GET http://localhost:3000/tracks
+Authorization: Bearer xxxxxxxxxxxxxx
+
+###
+
+POST http://localhost:3000/tracks
+Authorization: Bearer xxxxxxxxxxxxxx
+Content-Type: application/json
+
+{
+  "name": "My New Track",
+  "locations": [
+    {
+      "timestamp": 123456789,
+      "coords": {
+        "latitude": 100,
+        "longitude": 100,
+        "altitude": 100,
+        "accuracy": 100,
+        "heading": 100,
+        "speed": 100
+      }
+    }
+  ]
+}
