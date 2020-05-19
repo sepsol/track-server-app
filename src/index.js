@@ -13,6 +13,7 @@ app.use(express.json()); // this parses requests to json format  -- this is call
 app.use(authRoutes);     // our request handler functions are here
 
 const mongoUri = process.env.MONGODB_ADMIN;
+if (!mongoUri) throw new Error('You need to provide the authentication string from mongoDB.');
 
 // we add the options below so that we don't see any errors in our console.
 // mongoose === MongoClient
