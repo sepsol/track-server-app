@@ -23,4 +23,5 @@ const trackSchema = new mongoose.Schema({
 });
 
 
+// NOTE: every new schema is assigned an _id when saved to mongodb servers
 mongoose.model('Track', trackSchema);
