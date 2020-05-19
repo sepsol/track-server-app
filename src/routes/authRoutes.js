@@ -22,7 +22,7 @@ router.post('/signup', async (req, res) => {
     res.send({ token }); // { token: token }
     
   } catch (err) {
-    res.status(422).send(err.message);
+    res.status(422).send({ error: err.message });
     // 422 HTTP Status Code:
     // The request was well-formed 
     // but was unable to be followed due to semantic errors.
